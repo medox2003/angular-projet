@@ -1,0 +1,25 @@
+<div class="form">
+  <input #titleInput placeholder="Nouvelle tâche" (keyup.enter)="addFromInput(titleInput)" />
+  <button (click)="addFromInput(titleInput)">Ajouter</button>
+  <button (click)="clear()">Vider</button>
+</div>
+
+<p>{{ count() }} tâche(s)</p>
+
+<!-- Slide 11 : @if / @for -->
+@if (count() === 0) {
+  <p class="empty">Aucune tâche pour l’instant</p>
+} @else {
+  <ul>
+    @for (task of tasks(); track task.id) {
+      <li>
+        <!-- Slide 12 : pipes uppercase et date -->
+        <strong>{{ task.title | uppercase }}</strong>
+        — priorité : {{ task.priority }}
+        @if (task.dueDate) {
+          — échéance : {{ task.dueDate | date:'dd/MM/yyyy' }}
+        }
+      </li>
+    }
+  </ul>
+}
